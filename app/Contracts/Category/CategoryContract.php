@@ -2,7 +2,8 @@
 
 namespace App\Contracts\Category;
 
-interface CategoryContract extends \App\Contracts\Contract
-{
+use App\Contracts\Contract;
 
+interface CategoryContract extends Contract
+{
 }
