@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Contracts\Category\CategoryContract;
+use App\Repositories\Category\CategoryRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            CategoryContract::class,
+            CategoryRepository::class
+        );
     }
 
     /**
