@@ -1,0 +1,46 @@
+version: '3.7'
+services:
+    app:
+        build:
+            args:
+                user: ${USER}
+                uid: 1000
+            context: ./
+            dockerfile: ./docker/php/Dockerfile
+        image: laraveltdd
+        container_name: laraveltdd-app
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        networks:
+            - laraveltdd
+    db:
+        image: mysql:5.7
+        container_name: laraveltdd-db
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: laraveltdd
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_PASSWORD: root
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+            - ./docker/mysql:/docker-entrypoint-initdb.d
+            - ./docker/mysql/db.sql:/docker-entrypoint-initdb.d/db.sql
+        networks:
+            - laraveltdd
+    nginx:
+        image: nginx:alpine
+        container_name: laraveltdd-nginx
+        restart: unless-stopped
+        ports:
+            - 8000:80
+        volumes:
+            - ./:/var/www/
+            - ./docker/nginx:/etc/nginx/conf.d/
+        networks:
+            - laraveltdd
+networks:
+    laraveltdd:
+        driver: bridge

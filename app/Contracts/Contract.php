@@ -2,15 +2,31 @@
 
 namespace App\Contracts;
 
+use Illuminate\Database\Eloquent\Collection;
+
 interface Contract
 {
-    public function create(array $params);
+    /**
+     * @return Collection
+     */
+    public function all(): Collection;
 
-    public function all();
+    /**
+     * @param array $params
+     * @return bool
+     */
+    public function create(array $params): bool;
 
-    public function single(int $id);
+    /**
+     * @param array $params
+     * @param int $id
+     * @return int
+     */
+    public function update(array $params, int $id): int;
 
-    public function update(int $id, array $params);
-
-    public function delete(int $id);
+    /**
+     * @param int $id
+     * @return int
+     */
+    public function delete(int $id): int;
 }
