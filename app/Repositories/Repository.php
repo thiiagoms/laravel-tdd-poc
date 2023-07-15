@@ -8,9 +8,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 abstract class Repository
 {
-    /**
-     * @var mixed
-     */
     protected $model;
 
     /**
@@ -38,32 +35,32 @@ abstract class Repository
     }
 
     /**
-     * @param int $id
-     * @return mixed
+     * @param array $params
+     * @return bool
      */
-    public function single(int $id)
+    public function create(array $params): bool
     {
-        return $this->model->find($id);
+        $result = $this->model->create($params);
+
+        return $result instanceof $this->model;
     }
 
     /**
      * @param array $params
-     * @return void
+     * @param int $id
+     * @return int
      */
-    public function create(array $params)
+    public function update(array $params, int $id): int
     {
+        return $this->model->where(['id' => $id])->update($params);
     }
 
     /**
      * @param int $id
-     * @param array $params
-     * @return void
+     * @return int
      */
-    public function update(int $id, array $params)
+    public function delete(int $id): int
     {
-    }
-
-    public function delete(int $id)
-    {
+        return $this->model->destroy($id);
     }
 }

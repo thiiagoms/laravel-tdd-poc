@@ -32,7 +32,7 @@ final class CategoryService
      */
     private function getParams(array $params): array
     {
-        return ['name' => strip_tags($params['name'])];
+        return ['name' => strip_tags($params['name']), 'description' => strip_tags($params['description'])];
     }
 
     /**
@@ -54,10 +54,29 @@ final class CategoryService
 
     /**
      * @param array $params
-     * @return void
+     * @return bool
      */
-    public function store(array $params): void
+    public function store(array $params): bool
     {
-        $this->categoryContract->create($this->getParams($params));
+        return $this->categoryContract->create($this->getParams($params));
+    }
+
+    /**
+     * @param array $params
+     * @param int $id
+     * @return bool
+     */
+    public function update(array $params, int $id): bool
+    {
+        return $this->categoryContract->update($params, $id) >= 0;
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     */
+    public function destroy(int $id): bool
+    {
+        return $this->categoryContract->delete($id) >= 0;
     }
 }
