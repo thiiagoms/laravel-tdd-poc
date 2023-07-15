@@ -10,5 +10,17 @@ use App\Repositories\Repository;
 
 final class CategoryRepository extends Repository implements CategoryContract
 {
+    /**
+     * @var Category
+     */
     protected $model = Category::class;
+
+    /**
+     * @param int $id
+     * @return Category
+     */
+    public function single(int $id): Category
+    {
+        return $this->model->find($id);
+    }
 }
