@@ -2,7 +2,7 @@
   <a href="https://github.com/thiiagoms/laravel-tdd-poc">
       <img src="./assets/img/testing.png" alt="Logo" width="80" height="80">
   </a>
-  <h3>Conhecendo mais sobre testes em PHPUnit :brazil:</h3>
+  <h3>Implementação do TDD no Laravel :brazil:</h3>
   <p float="left">
     <img
       src="https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white"
